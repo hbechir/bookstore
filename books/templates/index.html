@@ -1,0 +1,35 @@
+
+{% include "components/navbar.html" %}
+
+
+{% block content %}
+<h1>Nour</h1>
+<!-- book list -->
+<h2>All Books:</h2>
+<ul>
+    {% for book in all_books %}
+        <li>{{ book.title }} by 
+            {% for author in book.authors.all %}
+                {{ author.name }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </li>
+    {% endfor %}
+</ul>
+
+
+<!-- book creation -->
+<h2>create new author</h2>
+<form method="post" name="author_form">
+    {% csrf_token %}
+    {{ author_form }}
+    <button type="submit">Submit Author</button>
+</form>
+
+
+<h2>Create a new book</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ book_form }}
+    <button type="submit">Submit Book</button>
+</form>
+{% endblock %}
