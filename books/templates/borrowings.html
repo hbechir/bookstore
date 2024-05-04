@@ -1,0 +1,68 @@
+
+{% include "components/navbar.html" %}
+
+
+{% block content %}
+<!-- book list -->
+ 
+    <div class="divider divider-primary">Borrowings</div>
+
+<div class="overflow-x-auto">
+    <table class="table">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th></th>
+          <th>Book Name</th>
+          <th>Author(s)</th>
+          <th>Borrower</th>
+          <th>Date Borrowed</th>
+            <th>Return Date</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for borrow in borrowings %}
+        <tr>
+            <td>{{ borrow.id }}</td>
+            <td>{{ borrow.book.title }}</td>
+            <td>
+                {% for author in borrow.book.authors.all %}
+                    {{ author.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{ borrow.borrower.first_name }} {{borrow.borrower.last_name}}</td>
+
+            <td>
+                {{borrow.date_borrowed}}
+            </td>
+            <td>
+                {{borrow.return_date}}
+            </td>
+            {% comment %} delete book btn {% endcomment %}
+            <td>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="borrow_id" value="{{ borrow.id }}">
+                    <button type="submit" class="btn btn-outline btn-primary">✔️ Mark As Returned</button>
+
+                
+            </td>
+
+          
+        </tr>
+
+        {% endfor %}
+    </tbody>
+    </table>
+    </div>
+    </ul>
+
+
+
+
+
+{% endblock %}
+
+
+

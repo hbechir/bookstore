@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!$053prdj-i)1g3323zeu_+fwp=@+3ie$m4g!_l=a+zbbnna6l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'books',
-    'user'
-]
+    'user', 
 
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -53,8 +53,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'bookstore.urls'
-print("os path:",os.path.join(BASE_DIR, 'templates'))
-print("base dir")
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
